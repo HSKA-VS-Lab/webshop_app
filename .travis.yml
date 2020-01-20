@@ -20,12 +20,6 @@ after_success:
   - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
   - docker login -u="$DOCKER_USER" -p="$DOCKER_PASS"
 
-  # CONFIGURED DB IMAGE
-  - export WEBSHOP_DB_IMAGE=mavogel/hska-vis-web-shop-db-image
-  - docker build -t $WEBSHOP_DB_IMAGE -f DockerfileMySQL .
-  - docker tag $WEBSHOP_DB_IMAGE:$COMMIT $WEBSHOP_DB_IMAGE:$TAG
-  - docker push $WEBSHOP_DB_IMAGE
-
   # LEGACY WEBSHOP
   - export LEGACY_WEBSHOP=mavogel/hska-vis-legacywebshop
   - docker build -t $LEGACY_WEBSHOP:$COMMIT .

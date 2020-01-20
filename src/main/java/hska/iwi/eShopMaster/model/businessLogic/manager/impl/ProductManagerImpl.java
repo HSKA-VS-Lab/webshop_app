@@ -16,7 +16,7 @@ public class ProductManagerImpl implements ProductManager {
 
 	public List<Product> getProducts() {
 		Product[] products = apiProduct.getProducts();
-		List<Product> list = new ArrayList<>(products.length);
+		List<Product> list = new ArrayList(products.length);
 		for (Product product : products) {
 			list.add(product);
 		}
@@ -26,7 +26,7 @@ public class ProductManagerImpl implements ProductManager {
 	public List<Product> getProductsForSearchValues(String searchDescription,
 			Double searchMinPrice, Double searchMaxPrice) {	
 		Product[] products = apiProduct.findProduct(Optional.of(searchDescription), Optional.of(searchMinPrice.toString()), Optional.of(searchMaxPrice.toString()));
-		List<Product> list = new ArrayList<>(products.length);
+		List<Product> list = new ArrayList(products.length);
 		for (Product product : products) {
 			list.add(product);
 		}

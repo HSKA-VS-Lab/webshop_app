@@ -13,7 +13,7 @@ public class CategoryManagerImpl implements CategoryManager{
 
 	public List<Category> getCategories() {
 		Category[] categories = apiCategory.getCategories();
-		List<Category> list = new ArrayList<>(categories.length);
+		List<Category> list = new ArrayList(categories.length);
 		for (Category category : categories) {
 			list.add(category);
 		}
