@@ -16,6 +16,10 @@ public class ConsumeApiUser {
         return restTemplate.getForObject(urlApiUser + "/" + input, User.class);
     }
 
+    public void addUser(User user) {
+        restTemplate.postForLocation(urlApiUser, user);
+    }
+
     public void addUser(String firstname, String lastname, String username, String password) {
         restTemplate.postForLocation(urlApiUser, firstname, lastname, username, password);
     }
