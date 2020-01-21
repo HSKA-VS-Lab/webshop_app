@@ -7,7 +7,7 @@ import org.springframework.web.client.RestTemplate;
 
 public class ConsumeApiProduct {
 
-    private String urlApiProduct = "http://localhost:8087/product";
+    private String urlApiProduct = "http://zuul:8092/product";
     
     RestTemplate restTemplate = new RestTemplate();
 

@@ -4,7 +4,7 @@ import org.springframework.web.client.RestTemplate;
 
 public class ConsumeApiUser {
 
-    private String urlApiUser = "http://localhost:8089/user";
+    private String urlApiUser = "http://zuul:8092/user";
     
     RestTemplate restTemplate = new RestTemplate();
 

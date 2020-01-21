@@ -4,7 +4,7 @@ import org.springframework.web.client.RestTemplate;
 
 public class ConsumeApiCategory {
 
-    private String urlApiCategory = "http://localhost:8086/category";
+    private String urlApiCategory = "http://zuul:8092/category";
     
     RestTemplate restTemplate = new RestTemplate();
 

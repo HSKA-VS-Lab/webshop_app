@@ -5,7 +5,7 @@ import org.springframework.web.client.RestTemplate;
 
 public class ConsumeApiRole {
     
-    private String urlApiRole = "http://localhost:8088/role";
+    private String urlApiRole = "http://zuul:8092/role";
     
     RestTemplate restTemplate = new RestTemplate();
 

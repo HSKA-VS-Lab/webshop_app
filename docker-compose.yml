@@ -1,4 +1,4 @@
-version: '3.2'
+version: '2.4'
 services:
   legacywebshop:
     build:
@@ -6,12 +6,12 @@ services:
       dockerfile: ./Dockerfile
     ports:
       - "8888:8080"
-    networks:
-      local_dev_net:
-          aliases:
-              - legacywebshop
+#    networks:
+#      local_dev_net:
+#          aliases:
+#              - legacywebshop
 
 
-networks:
-  local_dev_net:
-    driver: bridge
+#networks:
+#  local_dev_net:
+#    driver: bridge
