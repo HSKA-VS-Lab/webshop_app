@@ -20,7 +20,7 @@ public class AddProductAction extends ActionSupport {
 
 	private String name = null;
 	private String price = null;
-	private String cname = null;
+	private int id = 0;
 	private String details = null;
 	private List<Category> categories;
 	private Category cat = null;
@@ -33,12 +33,14 @@ public class AddProductAction extends ActionSupport {
 
 		if(user != null) {
 
-			CategoryManager categoryManager = new CategoryManagerImpl();
-			this.categories = categoryManager.getCategories();
+			/*CategoryManager categoryManager = new CategoryManagerImpl();
+			this.categories = categoryManager.getCategories();*/
 
-			for (Category c : categories) {
+			/*for (Category c : categories) {
 				if (cat.getName() == cname) {
-					this.setCategory(c);
+					this.setCategory(c);*/
+			CategoryManager categoryManager = new CategoryManagerImpl();
+			Category c = categoryManager.getCategory(id);
 
 					ProductManager productManager = new ProductManagerImpl();
 					int productId = productManager.addProduct(name, Double.parseDouble(price), c.getId(),
@@ -47,9 +49,9 @@ public class AddProductAction extends ActionSupport {
 					if (productId > 0) {
 						result = "success";
 					}
-					break;
+			/*		break;
 				}
-			}
+			}*/
 		}
 		return result;
 	}
@@ -100,12 +102,12 @@ public class AddProductAction extends ActionSupport {
 		this.price = price;
 	}
 
-	public String getCname() {
-		return cname;
+	public int getId() {
+		return id;
 	}
 
-	public void setCname(String cname) {
-		this.cname = cname;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getDetails() {
