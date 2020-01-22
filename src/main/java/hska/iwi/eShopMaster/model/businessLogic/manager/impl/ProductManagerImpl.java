@@ -29,7 +29,7 @@ public class ProductManagerImpl implements ProductManager {
 	}
 	
 	public List<Product> getProductsForSearchValues(String searchDescription,
-			Double searchMinPrice, Double searchMaxPrice) {
+			String searchMinPrice, String searchMaxPrice) {
 		log.info("getProductsForSearchValues called - Params:" + searchDescription + " " + searchMinPrice+" "+searchMaxPrice);
 		Product[] products = apiProduct.findProduct(Optional.of(searchDescription), Optional.of(searchMinPrice.toString()), Optional.of(searchMaxPrice.toString()));
 		List<Product> list = new ArrayList(products.length);
@@ -55,7 +55,8 @@ public class ProductManagerImpl implements ProductManager {
 	
 	public int addProduct(String name, double price, int categoryId, String details) {
 		log.info("addProduct called - Params:" + name + " "+price+" "+categoryId+" "+details);
-		apiProduct.addProduct(name, price, categoryId, details);
+		Product product = new Product(name,price,categoryId, details);
+		apiProduct.addProduct(product);
 		return 1; // TODO
 	}
 	

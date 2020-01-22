@@ -16,8 +16,9 @@ public class CategoryManagerImpl implements CategoryManager{
 	ConsumeApiCategory apiCategory = new ConsumeApiCategory();
 
 	public List<Category> getCategories() {
-		log.info("getCategories called - Params:");
+		log.info("getCategories called");
 		Category[] categories = apiCategory.getCategories();
+		log.info("getCategories called - Result-length:" + categories.length);
 		List<Category> list = new ArrayList<Category>(categories.length);
 		for (Category category : categories) {
 			list.add(category);
@@ -43,7 +44,8 @@ public class CategoryManagerImpl implements CategoryManager{
 
 	public void addCategory(String name) {
 		log.info("addCategory called - Params: "+ name);
-		apiCategory.addCategory(name);
+		Category category = new Category(name);
+		apiCategory.addCategory(category);
 	}
 
 	public void delCategory(Category cat) {

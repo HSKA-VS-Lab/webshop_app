@@ -48,13 +48,13 @@ public class SearchAction extends ActionSupport{
 			// Search products and show results:
 			ProductManager productManager = new ProductManagerImpl();
 //			this.products = productManager.getProductsForSearchValues(this.searchDescription, this.searchMinPrice, this.searchMaxPrice);
-			if (!searchMinPrice.isEmpty()){
+			/*if (!searchMinPrice.isEmpty()){
 				sMinPrice =  Double.parseDouble(this.searchMinPrice);
 			}
 			if (!searchMaxPrice.isEmpty()){
 				sMaxPrice =  Double.parseDouble(this.searchMaxPrice);
-			}
-			this.products = productManager.getProductsForSearchValues(this.searchDescription, sMinPrice, sMaxPrice);
+			}*/
+			this.products = productManager.getProductsForSearchValues(this.searchDescription, searchMinPrice, searchMaxPrice);
 			
 			// Show all categories:
 			CategoryManager categoryManager = new CategoryManagerImpl();

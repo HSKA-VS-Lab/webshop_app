@@ -25,7 +25,7 @@ public class InitCategorySiteAction extends ActionSupport {
 
 	public String execute() throws Exception {
 		
-		String res = "input";
+		String result = "input";
 
 		Map<String, Object> session = ActionContext.getContext().getSession();
 		user = (User) session.get("webshop_user");
@@ -37,15 +37,15 @@ public class InitCategorySiteAction extends ActionSupport {
 			
 			if(pageToGoTo != null){
 				if(pageToGoTo.equals("c")){
-					res = "successC";	
+					result = "successC";
 				}
 				else if(pageToGoTo.equals("p")){
-					res = "successP";
+					result = "successP";
 				}				
 			}
 		}
 		
-		return res;
+		return result;
 	}
 
 	public List<Category> getCategories() {
