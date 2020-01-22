@@ -1,6 +1,5 @@
 package hska.iwi.eShopMaster.model.businessLogic.manager.impl;
 
-import hska.iwi.eShopMaster.model.businessLogic.manager.CategoryManager;
 import hska.iwi.eShopMaster.model.businessLogic.manager.ProductManager;
 import hska.iwi.eShopMaster.model.businessLogic.manager.impl.ConsumingREST.ConsumeApiCategory;
 import hska.iwi.eShopMaster.model.businessLogic.manager.impl.ConsumingREST.ConsumeApiProduct;
@@ -10,7 +9,6 @@ import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class ProductManagerImpl implements ProductManager {
 
@@ -21,7 +19,7 @@ public class ProductManagerImpl implements ProductManager {
 	public List<Product> getProducts() {
 		log.info("getProducts called");
 		Product[] products = apiProduct.getProducts();
-		List<Product> list = new ArrayList(products.length);
+		List<Product> list = new ArrayList<Product>(products.length);
 		for (Product product : products) {
 			list.add(product);
 		}
@@ -31,8 +29,17 @@ public class ProductManagerImpl implements ProductManager {
 	public List<Product> getProductsForSearchValues(String searchDescription,
 			String searchMinPrice, String searchMaxPrice) {
 		log.info("getProductsForSearchValues called - Params:" + searchDescription + " " + searchMinPrice+" "+searchMaxPrice);
-		Product[] products = apiProduct.findProduct(Optional.of(searchDescription), Optional.of(searchMinPrice.toString()), Optional.of(searchMaxPrice.toString()));
-		List<Product> list = new ArrayList(products.length);
+		if (searchMinPrice == null) {
+			searchMinPrice = Double.valueOf(0);
+		}
+		if (searchMaxPrice == null) {
+			searchMaxPrice = Double.valueOf(9999999);
+		}
+		Product[] products = apiProduct.findProduct(searchDescription, searchMinPrice.toString(), searchMaxPrice.toString());
+		if (products == null) {
+			return new ArrayList<Product>();
+		}
+		List<Product> list = new ArrayList<Product>(products.length);
 		for (Product product : products) {
 			list.add(product);
 		}
@@ -46,7 +53,7 @@ public class ProductManagerImpl implements ProductManager {
 
 	public Product getProductByName(String name) {
 		log.info("getProductByName called - Params:" + name);
-		Product[] products = apiProduct.findProduct(Optional.of(name), Optional.ofNullable(null), Optional.ofNullable(null));
+		Product[] products = apiProduct.findProduct(name, "0", "9999999");
 		if (products != null && products.length >= 1) {
 			return products[0];
 		}

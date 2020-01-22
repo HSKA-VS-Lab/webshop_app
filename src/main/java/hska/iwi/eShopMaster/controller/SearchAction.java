@@ -36,6 +36,7 @@ public class SearchAction extends ActionSupport{
 	
 
 	public String execute() throws Exception {
+		System.out.println("Hello");
 		
 		String result = "input";
 		
