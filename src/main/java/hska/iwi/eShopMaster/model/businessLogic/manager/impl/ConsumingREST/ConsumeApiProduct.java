@@ -32,9 +32,32 @@ public class ConsumeApiProduct {
         return restTemplate.getForObject(urlApiProduct + "/" + id, Product.class);
     }
 
-    public Product[] findProduct(Optional<String> searchValue, Optional<String> priceMinValue, Optional<String> priceMaxValue) {
-        Product[] list = restTemplate.getForObject(urlApiProduct + "/product/find", Product[].class, searchValue, priceMinValue, priceMaxValue);
+    public Product[] findProduct(String searchValue, String priceMinValue, String priceMaxValue) {
+        String url = buildUrl(searchValue, priceMinValue, priceMaxValue);
+        Product[] list = restTemplate.getForObject(url, Product[].class);
         return list;
+    }
+
+    String buildUrl(String searchValue, String priceMinValue, String priceMaxValue) {
+        String url = urlApiProduct
+                + "/find?searchValue=[SVAL]&priceMinValue=[PMIN]&priceMaxValue=[PMAX]";
+
+        if (searchValue != null)
+            url = url.replace("[SVAL]", searchValue);
+        else
+            url = url.replace("searchValue=[SVAL]&", "");
+
+        if (priceMinValue != null)
+            url = url.replace("[PMIN]", priceMinValue);
+        else
+            url = url.replace("priceMinValue=[PMIN]&", "");
+
+        if (priceMaxValue != null)
+            url = url.replace("[PMAX]", priceMaxValue);
+        else
+            url = url.replace("&priceMaxValue=[PMAX]", "");
+
+        return url;
     }
 
     public void addProduct(String name, double price, int categoryId, String details) {

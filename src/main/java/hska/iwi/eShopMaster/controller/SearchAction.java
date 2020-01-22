@@ -36,6 +36,7 @@ public class SearchAction extends ActionSupport{
 	
 
 	public String execute() throws Exception {
+		System.out.println("Hello");
 		
 		String result = "input";
 		
@@ -47,7 +48,6 @@ public class SearchAction extends ActionSupport{
 		if(user != null){
 			// Search products and show results:
 			ProductManager productManager = new ProductManagerImpl();
-//			this.products = productManager.getProductsForSearchValues(this.searchDescription, this.searchMinPrice, this.searchMaxPrice);
 			if (!searchMinPrice.isEmpty()){
 				sMinPrice =  Double.parseDouble(this.searchMinPrice);
 			}
