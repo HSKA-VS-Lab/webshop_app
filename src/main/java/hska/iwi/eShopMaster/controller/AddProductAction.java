@@ -8,6 +8,7 @@ import hska.iwi.eShopMaster.model.businessLogic.manager.impl.ConsumingREST.Categ
 import hska.iwi.eShopMaster.model.businessLogic.manager.impl.ConsumingREST.User;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import com.opensymphony.xwork2.ActionContext;
@@ -19,26 +20,37 @@ public class AddProductAction extends ActionSupport {
 
 	private String name = null;
 	private String price = null;
-	private int categoryId = 0;
+	private String cname = null;
 	private String details = null;
 	private List<Category> categories;
+	private Category cat = null;
 
 	public String execute() throws Exception {
 		String result = "input";
 		Map<String, Object> session = ActionContext.getContext().getSession();
 		User user = (User) session.get("webshop_user");
+		ActionContext.getContext().setLocale(Locale.US);
 
-		//if(user != null && (user.getRole().getTyp().equals("admin"))) {
+		if(user != null) {
 
-			ProductManager productManager = new ProductManagerImpl();
-			int productId = productManager.addProduct(name, Double.parseDouble(price), categoryId,
-					details);
+			CategoryManager categoryManager = new CategoryManagerImpl();
+			this.categories = categoryManager.getCategories();
 
-			if (productId > 0) {
-				result = "success";
+			for (Category c : categories) {
+				if (cat.getName() == cname) {
+					this.setCategory(c);
+
+					ProductManager productManager = new ProductManagerImpl();
+					int productId = productManager.addProduct(name, Double.parseDouble(price), c.getId(),
+							details);
+
+					if (productId > 0) {
+						result = "success";
+					}
+					break;
+				}
 			}
-		//}
-
+		}
 		return result;
 	}
 
@@ -72,6 +84,14 @@ public class AddProductAction extends ActionSupport {
 		this.name = name;
 	}
 
+	public Category getCategory() {
+		return cat;
+	}
+
+	public void setCategory(Category cat) {
+		this.cat = cat;
+	}
+
 	public String getPrice() {
 		return price;
 	}
@@ -80,12 +100,12 @@ public class AddProductAction extends ActionSupport {
 		this.price = price;
 	}
 
-	public int getCategoryId() {
-		return categoryId;
+	public String getCname() {
+		return cname;
 	}
 
-	public void setCategoryId(int categoryId) {
-		this.categoryId = categoryId;
+	public void setCname(String cname) {
+		this.cname = cname;
 	}
 
 	public String getDetails() {

@@ -3,11 +3,13 @@ package hska.iwi.eShopMaster.controller;
 import hska.iwi.eShopMaster.model.businessLogic.manager.CategoryManager;
 import hska.iwi.eShopMaster.model.businessLogic.manager.ProductManager;
 import hska.iwi.eShopMaster.model.businessLogic.manager.impl.CategoryManagerImpl;
+import hska.iwi.eShopMaster.model.businessLogic.manager.impl.ConsumingREST.Product_Frontend;
 import hska.iwi.eShopMaster.model.businessLogic.manager.impl.ProductManagerImpl;
 import hska.iwi.eShopMaster.model.businessLogic.manager.impl.ConsumingREST.Product;
 import hska.iwi.eShopMaster.model.businessLogic.manager.impl.ConsumingREST.Category;
 import hska.iwi.eShopMaster.model.businessLogic.manager.impl.ConsumingREST.User;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -31,7 +33,8 @@ public class SearchAction extends ActionSupport{
 	private Double sMaxPrice = null;
 	
 	private User user;
-	private List<Product> products;
+	private List<Product> products_old;
+	private List<Product_Frontend> products = new ArrayList();
 	private List<Category> categories;
 	
 
@@ -55,11 +58,30 @@ public class SearchAction extends ActionSupport{
 			if (!searchMaxPrice.isEmpty()){
 				sMaxPrice =  Double.parseDouble(this.searchMaxPrice);
 			}*/
-			this.products = productManager.getProductsForSearchValues(this.searchDescription, searchMinPrice, searchMaxPrice);
-			
-			// Show all categories:
+			this.products_old = productManager.getProductsForSearchValues(this.searchDescription, searchMinPrice, searchMaxPrice);
+
+
 			CategoryManager categoryManager = new CategoryManagerImpl();
 			this.categories = categoryManager.getCategories();
+
+
+			for(Product p : products_old){
+				for(Category c : categories) {
+					if(c.getId() == p.getCategoryId()) {
+						Product_Frontend pf = new Product_Frontend();
+						pf.setName(p.getName());
+						pf.setPrice(p.getPrice());
+						pf.setDetails(p.getDetails());
+						pf.setCategory(c.getName());
+						products.add(pf);
+					}
+				}
+			}
+
+
+			// Show all categories:
+			/*CategoryManager categoryManager = new CategoryManagerImpl();
+			this.categories = categoryManager.getCategories();*/
 			result = "success";
 		}
 		
@@ -75,12 +97,20 @@ public class SearchAction extends ActionSupport{
 			this.user = user;
 		}
 		
-		public List<Product> getProducts() {
+		public List<Product_Frontend> getProducts() {
 			return products;
 		}
 
-		public void setProducts(List<Product> products) {
+		public void setProducts(List<Product_Frontend> products) {
 			this.products = products;
+		}
+
+		public List<Product> getProducts_old() {
+			return products_old;
+		}
+
+		public void setProducts_old(List<Product> product_old) {
+			this.products_old = products_old;
 		}
 		
 		public List<Category> getCategories() {

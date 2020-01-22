@@ -1,6 +1,10 @@
 package hska.iwi.eShopMaster.controller;
 
+import hska.iwi.eShopMaster.model.businessLogic.manager.CategoryManager;
 import hska.iwi.eShopMaster.model.businessLogic.manager.ProductManager;
+import hska.iwi.eShopMaster.model.businessLogic.manager.impl.CategoryManagerImpl;
+import hska.iwi.eShopMaster.model.businessLogic.manager.impl.ConsumingREST.Category;
+import hska.iwi.eShopMaster.model.businessLogic.manager.impl.ConsumingREST.Product_Frontend;
 import hska.iwi.eShopMaster.model.businessLogic.manager.impl.ProductManagerImpl;
 import hska.iwi.eShopMaster.model.businessLogic.manager.impl.ConsumingREST.Product;
 import hska.iwi.eShopMaster.model.businessLogic.manager.impl.ConsumingREST.User;
@@ -17,7 +21,10 @@ public class ProductDetailsAction extends ActionSupport {
 	private String searchValue;
 	private Integer searchMinPrice;
 	private Integer searchMaxPrice;
-	private Product product;
+	private Product product_old;
+	private Product_Frontend product;
+	private String name;
+	private Category category;
 
 	/**
 	 * 
@@ -33,7 +40,13 @@ public class ProductDetailsAction extends ActionSupport {
 		
 		if(user != null) {
 			ProductManager productManager = new ProductManagerImpl();
-			product = productManager.getProductById(id);
+			//product = productManager.getProductById(id);
+			product_old = productManager.getProductByName(name);
+
+			CategoryManager categoryManager = new CategoryManagerImpl();
+			category = categoryManager.getCategory(product_old.getCategoryId());
+
+			product = new Product_Frontend(product_old.getName(), product_old.getPrice(), category.getName(), product_old.getDetails());
 			
 			res = "success";			
 		}
@@ -55,6 +68,14 @@ public class ProductDetailsAction extends ActionSupport {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getSearchValue() {
@@ -81,11 +102,19 @@ public class ProductDetailsAction extends ActionSupport {
 		this.searchMaxPrice = searchMaxPrice;
 	}
 
-	public Product getProduct() {
+	public Product getProduct_old() {
+		return product_old;
+	}
+
+	public void setProduct_old(Product product_old) {
+		this.product_old = product_old;
+	}
+
+	public Product_Frontend getProduct() {
 		return product;
 	}
 
-	public void setProduct(Product product) {
+	public void setProduct(Product_Frontend product) {
 		this.product = product;
 	}
 }

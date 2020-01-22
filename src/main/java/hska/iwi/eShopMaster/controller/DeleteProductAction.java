@@ -18,6 +18,7 @@ public class DeleteProductAction extends ActionSupport {
 	private static final long serialVersionUID = 3666796923937616729L;
 
 	private int id;
+	private String name;
 
 	public String execute() throws Exception {
 		
@@ -27,7 +28,8 @@ public class DeleteProductAction extends ActionSupport {
 		User user = (User) session.get("webshop_user");
 		
 		ProductManager pm = new ProductManagerImpl();
-		pm.deleteProductById(id);
+		//pm.deleteProductById(id);
+		pm.deleteProductById(pm.getProductByName(name).getId());
 
 		/*if(user != null && (user.getRole().getTyp().equals("admin"))) {
 
@@ -47,6 +49,14 @@ public class DeleteProductAction extends ActionSupport {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 }

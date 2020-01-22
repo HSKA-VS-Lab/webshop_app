@@ -61,8 +61,7 @@
 								
 						<div class = "form-group">
 							<label>Kategorie*:</label>
-				Eventuell name="id"
-							<s:select name="categoryId" cssClass ="form-control"  list="categories" listKey="id" listValue="name" value="%{categories.{name}}" required="true" />
+							<s:select name="cname" cssClass ="form-control"  list="categories" listKey="name" listValue="name" value="%{categories.{name}}" required="true" />
 						</div>
 						
 						<div class = "form-group">

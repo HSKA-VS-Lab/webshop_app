@@ -66,7 +66,7 @@
 			
 			<div class="row">
 				<h3>
-					<s:text name="productsF.title" />
+					<s:text name="products.title" />
 				</h3>
 			</div>
 	
@@ -83,16 +83,16 @@
 					<td></td>
 				</tr>
 				<s:iterator value="products" status="rowstatus">
-					<tr>			
+					<tr>
 					<s:if test="#rowstatus.odd == true">
 						<td class="odd"><s:property value="#rowstatus.index+1" />
 						<td class="odd"><s:property value="name" /></td>
 						<td class="odd"><s:property value="price" /></td>
 						<td class="odd"><s:property value="category" /></td>
 										<!--<td class="odd"><a href="./ProductDetailsAction.action?id=<s:property value='id'/>&searchValue=<s:property value='searchValue'/>&searchMinPrice=<s:property value='searchMinPrice'/>&searchMaxPrice=<s:property value='searchMaxPrice'/>"><img src="img/detBtn.png" alt="<s:text name="product.details" />"/></a></td>-->
-						<td class="odd"><a href="./ProductDetailsAction.action?id=<s:property value='id'/>"><img src="img/detBtn.png" alt="<s:text name="product.details" />"/></a></td>
+						<td class="odd"><a href="./ProductDetailsAction.action?name=<s:property value='name'/>"><img src="img/detBtn.png" alt="<s:text name="product.details" />"/></a></td>
 						<s:if test="#session.webshop_user.roleId==0">
-							<td class="odd"><a href="./DeleteProductAction.action?id=<s:property value='id'/>"><img src="img/delBtn.png" alt="<s:text name="product.delete" />"/></a></td>
+							<td class="odd"><a href="./DeleteProductAction.action?name=<s:property value='name'/>"><img src="img/delBtn.png" alt="<s:text name="product.delete" />"/></a></td>
 						</s:if>
 					</s:if>
 					<s:else>
@@ -100,9 +100,10 @@
 						<td><s:property value="name" /></td>
 						<td><s:property value="price" /></td>
 						<td><s:property value="category" /></td>
-										<td><a href="./ProductDetailsAction.action?id=<s:property value='id'/>&searchValue=<s:property value='searchValue'/>&searchMinPrice=<s:property value='searchMinPrice'/>&searchMaxPrice=<s:property value='searchMaxPrice'/>"><img src="img/detBtn.png" alt="<s:text name="product.details" />"/></a></td>
-						<s:if test="#session.webshop_user.role.level==0">
-							<td><a href="./DeleteProductAction.action?id=<s:property value='id'/>"><img src="img/delBtn.png" alt="<s:text name="product.delete" />"/></a></td>
+										<!--<td><a href="./ProductDetailsAction.action?name=<s:property value='name'/>&searchValue=<s:property value='searchValue'/>&searchMinPrice=<s:property value='searchMinPrice'/>&searchMaxPrice=<s:property value='searchMaxPrice'/>"><img src="img/detBtn.png" alt="<s:text name="product.details" />"/></a></td>-->
+						<td class="odd"><a href="./ProductDetailsAction.action?name=<s:property value='name'/>"><img src="img/detBtn.png" alt="<s:text name="product.details" />"/></a></td>
+						<s:if test="#session.webshop_user.roleId==0">
+							<td><a href="./DeleteProductAction.action?name=<s:property value='name'/>"><img src="img/delBtn.png" alt="<s:text name="product.delete" />"/></a></td>
 						</s:if>			
 					</s:else>
 					</tr>

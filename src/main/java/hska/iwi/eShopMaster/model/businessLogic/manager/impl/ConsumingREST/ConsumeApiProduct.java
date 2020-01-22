@@ -104,8 +104,9 @@ public class ConsumeApiProduct {
             request = request.replace("searchValue=&","");
         if(request.indexOf("priceMinValue=&") >= 0)
             request = request.replace("priceMinValue=&","");
-        if(request.substring(request.indexOf("priceMaxValue=")).length() == "priceMaxValue=".length())
-            request = request.replace("priceMaxValue=","");
+        if(request.contains("priceMaxValue="))
+            if(request.substring(request.indexOf("priceMaxValue=")).length() == "priceMaxValue=".length())
+                request = request.replace("priceMaxValue=","");
 
         if(request.lastIndexOf("&") == request.length()-1)
             request = request.substring(0,request.lastIndexOf("&"));

@@ -55,7 +55,7 @@
 				</tr>
 				<tr>
 					<td><s:text name="details.category" /></td>
-					<td><s:property value="product.category.name" /></td>
+					<td><s:property value="product.category" /></td>
 				</tr>
 				<tr>
 					<td><s:text name="details.details" /></td>
@@ -64,7 +64,7 @@
 			</table>
 	
 			<!--<a href="./SearchAction.action?id=<s:property value='id'/>&searchValue=<s:property value='searchValue'/>&searchMinPrice=<s:property value='searchMinPrice'/>&searchMaxPrice=<s:property value='searchMaxPrice'/>">[<s:text name="link.back" />]</a>-->
-			<a href="./SearchAction.action?id=<s:property value='id'/>">[<s:text name="link.back" />]</a>
+			<!--<a href="./SearchAction.action?id=<s:property value='id'/>">[<s:text name="link.back" />]</a>-->
 		</div>
 	</body>
 </html>

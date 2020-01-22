@@ -12,7 +12,7 @@ public class Product_Frontend {
     private String category;
 
     // the framework needs a default constructor for whatever reason..
-    private Product_Frontend() {
+    public Product_Frontend() {
         name = "unknown";
         price = 0.0;
         details = "";
