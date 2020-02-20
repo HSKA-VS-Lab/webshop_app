@@ -48,7 +48,7 @@ public class SearchAction extends ActionSupport{
 		user = (User) session.get("webshop_user");
 		ActionContext.getContext().setLocale(Locale.US);  
 		
-		if(user != null){
+		//if(user != null){
 			// Search products and show results:
 			ProductManager productManager = new ProductManagerImpl();
 //			this.products = productManager.getProductsForSearchValues(this.searchDescription, this.searchMinPrice, this.searchMaxPrice);
@@ -83,7 +83,7 @@ public class SearchAction extends ActionSupport{
 			/*CategoryManager categoryManager = new CategoryManagerImpl();
 			this.categories = categoryManager.getCategories();*/
 			result = "success";
-		}
+		//}
 		
 		return result;
 	}

@@ -3,10 +3,12 @@ package hska.iwi.eShopMaster.model.businessLogic.manager.impl;
 import hska.iwi.eShopMaster.model.businessLogic.manager.UserManager;
 import hska.iwi.eShopMaster.model.businessLogic.manager.impl.ConsumingREST.ConsumeApiRole;
 import hska.iwi.eShopMaster.model.businessLogic.manager.impl.ConsumingREST.ConsumeApiUser;
+import hska.iwi.eShopMaster.model.businessLogic.manager.impl.ConsumingREST.OAuthRestTemplate;
 import hska.iwi.eShopMaster.model.businessLogic.manager.impl.ConsumingREST.Role;
 import hska.iwi.eShopMaster.model.businessLogic.manager.impl.ConsumingREST.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 
 /**
  * 
@@ -67,6 +69,15 @@ public class UserManagerImpl implements UserManager {
 			return false;
 		}
 		return true;
+	}
+
+	
+    public boolean loginUser(String username, String password) {
+		return OAuthRestTemplate.login(username, password);
+	}
+
+	public void logout() {
+		OAuthRestTemplate.logout();
 	}
 
 }

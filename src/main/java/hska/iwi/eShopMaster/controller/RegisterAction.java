@@ -33,7 +33,7 @@ public class RegisterAction extends ActionSupport {
 
    		this.role = userManager.getRoleByLevel(1); // 1 -> regular User, 2-> Admin
 
-   		if (!userManager.doesUserAlreadyExist(this.username)) {
+   		//if (!userManager.doesUserAlreadyExist(this.username)) {
     		    	
 	        // save it to database
 	        userManager.registerUser(this.username, this.firstname, this.lastname, this.password1, this.role);
@@ -44,10 +44,10 @@ public class RegisterAction extends ActionSupport {
 				session.put("message", "user registered, please login");
 	            result = "success";
 	        
-    	}
-    	else {
-    		addActionError(getText("error.username.alreadyInUse"));
-    	}
+    	//}
+    	//else {
+    	//	addActionError(getText("error.username.alreadyInUse"));
+    	//}
         return result;
 
     }

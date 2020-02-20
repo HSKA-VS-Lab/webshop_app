@@ -3,6 +3,9 @@ package hska.iwi.eShopMaster.controller;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
+import hska.iwi.eShopMaster.model.businessLogic.manager.UserManager;
+import hska.iwi.eShopMaster.model.businessLogic.manager.impl.UserManagerImpl;
+
 public class LogoutAction extends ActionSupport {
 
 	/**
@@ -14,6 +17,10 @@ public class LogoutAction extends ActionSupport {
 
 		// Clear session:
 		ActionContext.getContext().getSession().clear();
+
+		
+		UserManager myCManager = new UserManagerImpl();
+		myCManager.logout();
 		
 		return "success";
 		

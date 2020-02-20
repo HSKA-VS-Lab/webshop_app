@@ -34,12 +34,16 @@ public class ListAllProductsAction extends ActionSupport {
 		Map<String, Object> session = ActionContext.getContext().getSession();
 		user = (User) session.get("webshop_user");
 		
-		if(user != null){
+		//if(user != null){
 			System.out.println("list all products!");
 			ProductManager productManager = new ProductManagerImpl();
 			this.products_old = productManager.getProducts();
-			result = "success";
-		}
+			if (this.products_old.isEmpty()) {
+				result = "input";
+			} else {
+				result = "success";
+			}
+		//}
 
 		CategoryManager categoryManager = new CategoryManagerImpl();
 		categories = categoryManager.getCategories();

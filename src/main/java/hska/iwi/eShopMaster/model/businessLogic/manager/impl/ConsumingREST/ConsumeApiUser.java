@@ -53,22 +53,24 @@ public class ConsumeApiUser {
 
     public User[] getAllUsers() {
         OAuth2RestTemplate restTemplate3 = foo();
-        return restTemplate3.getForObject(urlApiUser, User[].class);
+        return OAuthRestTemplate.temp.getForObject(urlApiUser, User[].class);
         //return restTemplate.getForObject(urlApiUser, User[].class);
     }
 
     public User getUser(String input) {
         OAuth2RestTemplate restTemplate3 = foo();
-        return restTemplate3.getForObject(urlApiUser + "/" + input, User.class);
+        return OAuthRestTemplate.temp.getForObject(urlApiUser + "/" + input, User.class);
         //return restTemplate.getForObject(urlApiUser + "/" + input, User.class);
     }
 
+    // this one has to use client credentials!
     public void addUser(User user) {
         OAuth2RestTemplate restTemplate3 = foo();
         restTemplate3.postForLocation(urlApiUser, user);
         //restTemplate.postForLocation(urlApiUser, user);
     }
 
+    // this one has to use client credentials!
     public void addUser(String firstname, String lastname, String username, String password) {
         OAuth2RestTemplate restTemplate3 = foo();
         restTemplate3.postForLocation(urlApiUser, firstname, lastname, username, password);
@@ -77,19 +79,19 @@ public class ConsumeApiUser {
 
     public void updateUser(int id, String firstname, String lastname, String username, String password) {
         OAuth2RestTemplate restTemplate3 = foo();
-        restTemplate3.put(urlApiUser + "/" + id, firstname, lastname, username, password);
+        OAuthRestTemplate.temp.put(urlApiUser + "/" + id, firstname, lastname, username, password);
         //restTemplate.put(urlApiUser + "/" + id, firstname, lastname, username, password);
     }
 
     public void deleteAllUsers() {
         OAuth2RestTemplate restTemplate3 = foo();
-        restTemplate3.delete(urlApiUser);
+        OAuthRestTemplate.temp.delete(urlApiUser);
         //restTemplate.delete(urlApiUser);
     }
 
     public void deleteUser(int id) {
         OAuth2RestTemplate restTemplate3 = foo();
-        restTemplate3.delete(urlApiUser + "/" + id);
+        OAuthRestTemplate.temp.delete(urlApiUser + "/" + id);
         //restTemplate.delete(urlApiUser + "/" + id);
     }
 

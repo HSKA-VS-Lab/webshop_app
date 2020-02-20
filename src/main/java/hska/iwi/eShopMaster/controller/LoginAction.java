@@ -29,34 +29,19 @@ public class LoginAction extends ActionSupport {
 		String result = "input";
 
 		UserManager myCManager = new UserManagerImpl();
-		
-		// Get user from DB:
-		User user = myCManager.getUserByUsername(getUsername());
 
-		// Does user exist?
-		if (user != null) {
-			// Is the password correct?
-			if (user.getPassword().equals(getPassword())) {
-				// Get session to save user role and login:
-				Map<String, Object> session = ActionContext.getContext().getSession();
+		if (myCManager.loginUser(getUsername(), getPassword())) {
+			Map<String, Object> session = ActionContext.getContext().getSession();
 				
 				// Save user object in session:
-				session.put("webshop_user", user);
 				session.put("message", "");
-				firstname= user.getFirstname();
-				lastname = user.getLastname();
-				role = user.getRoleId();
+				session.put("webshop_user", new User("dummy", "dummy", "dummy", "dummy", 0));
 				result = "success";
-			}
-			else {
-				addActionError(getText("error.password.wrong"));
-			}
+		} else {
+			addActionError(getText("error.password.wrong"));
 		}
-		else {
-			addActionError(getText("error.username.wrong"));
-		}
-
 		return result;
+		
 	}
 	
 	@Override
